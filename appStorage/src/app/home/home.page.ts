@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { AvatarService } from '../services/avatar.service';
@@ -12,7 +12,7 @@ import { DocumentData } from '@angular/fire/firestore';
   styleUrls: ['home.page.scss']
 })
 export class HomePage {
-  profile = null;
+  profile: DocumentData | null = null;
 
   constructor(
     private avatarService: AvatarService,
@@ -50,7 +50,7 @@ export class HomePage {
 
   async changeImage() {
     try {
-      const image = await Camera.getPhoto({
+      const image: Photo = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.Base64,
