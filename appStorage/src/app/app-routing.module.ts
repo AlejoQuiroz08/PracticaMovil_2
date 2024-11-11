@@ -8,7 +8,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
 	{
 		path: '',
-		loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
+		loadChildren: () => import('./login/login.module').then((m) => m.LoginPageModule),
 		...canActivate(redirectLoggedInToHome)
 	},
 	{
