@@ -6,36 +6,20 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from "../environments/environment";
+import { firebaseConfig } from 'src/environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth'; 
+import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';  // Importa FormsModule y ReactiveFormsModule
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-	
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    FormsModule,  // Importa FormsModule para formularios de plantilla
-    ReactiveFormsModule,  // Importa ReactiveFormsModule para formularios reactivos
-  ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideFirebaseApp(() => initializeApp({
-		apiKey: "AIzaSyDp4RCs8UwhBrTNivTVoBkbDwQ_s1LYxLI",
-		authDomain: "b-1accc.firebaseapp.com",
-		projectId: "b-1accc",
-		storageBucket: "b-1accc.firebasestorage.app",
-		messagingSenderId: "606986248368",
-		appId: "1:606986248368:web:df6c0a16fa5bc4ed9a9b75",
-		measurementId: "G-QDN8GEEH17"
-	  
-    })),
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-	provideAuth(() => getAuth())
+    provideStorage(() => getStorage())
   ],
   bootstrap: [AppComponent],
 })

@@ -12,8 +12,8 @@
 <ion-content class="ion-padding">
 	<div class="preview">
 		<ion-avatar (click)="changeImage()">
-			<img *ngIf="profile && profile['imageUrl']; else placeholder_avatar" [src]="profile['imageUrl']" />
-			<ng-template #placeholder_avatar>
+			<img *ngIf="profile?.imageUrl; else placheolder_avatar;" [src]="profile?.imageUrl" />
+			<ng-template #placheolder_avatar>
 				<div class="fallback">
 					<p>Select avatar</p>
 				</div>
